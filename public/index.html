@@ -3,273 +3,411 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Ruby on Rails: Welcome aboard</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
-      
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
-      
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
-      
-      
-      #page {
-        background-color: #f0f0f0;
-        width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 500px;
-      }
-      
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
+	<link rel="stylesheet" href="/stylesheets/home.css" type="text/css" />
+	<script src="/javascripts/jquery-2.1.1.js"></script>
+	<!--script src="/javascripts/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script-->
+	<!--script src="http://code.jquery.com/jquery-1.10.2.js"></script-->	
+	
+	<script src="/javascripts/common.js" ></script>
+	<link rel="stylesheet" href="/stylesheets/common.css" type="text/css" />
+	<script src="/javascripts/utils.js" type="text/javascript" charset="utf-8"></script>
+	<!--script src="/javascripts/jquery-ui-1.10.4.js"></script-->
+	<link rel="stylesheet" href="/stylesheets/jquery-ui-1.11.0-smoothness.css" type="text/css" />
 
-      #footer {
-        clear: both;
-      }
-      
+	<script src="/javascripts/jquery-ui-1.11.1.js"></script>
+	
+	
+	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
+	
+<style>
+.global_menu{
+	cursor: pointer;text-align:right;
+	color: rgb(128, 128, 128);
+	font-family: Lucida Grande,Geneva,Verdana,Arial;
+	font-size: 12px;
+}
+/*body {
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-size: 62.5%;
+}*/
+#account_menu li{
+	height:30px;
 
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
+}
+</style>
+</head>
+<body>
+	<center>
+	<div id="main" style="border:0px solid green;width:1000px;">
+		<div id="header" style="border:0px solid red;height:30px;">
+			<div id="account" onclick="show_menu();event.stopPropagation();" class="global_menu" style="right:1px;float:right;bottom:0px;line-height:30px;">
+				<div id="account_value" style="border:0px solid blue;padding: 3px 1em 3px 0.4em;z-index:100;font-weight: normal;color: rgb(33, 33, 33);font-family: Verdana,Arial,sans-serif;font-size: 1.1em;">jackie.ju@gmail.com</div>
+				<ul id="account_menu" class="shadowed" style="display:none;margin-top:-38px;z-index:1;">
+						<li id="account_name">jackie.ju@gmail.com</li>
+						<li id="account_tenant">Tenant 1</li>
+						<li id="account_email">ddd</li>
+				</ul>
+			</div>
+		</div>
+	<div id="pane1">
+	
+	<div id="pane1_left" class="login-panel" style="width:100px;height:500px;overflow-y:auto;border:1px solid red;">
+		<h3 style="margin-top:-20px;font-size:13pt;">我的应用</h3>
+		<div id="applist" style="">
+			<!-- <div class="login-btn-panel" >
+				    <a id="btn_open_app" class="login-btn" href="javascript:;" style="width:100px;height:20px;padding:10 10 50 30;">
+							test
+				    </a>
+				</div>
+				<div class="login-btn-panel" >
+				    <a id="btn_open_app" class="login-btn" href="javascript:;" style="width:100px;height:20px;padding:10 10 50 30;">
+							test2
+				    </a>
+				</div> -->
+		</div>
+	</div><!-- pane1_left -->
+	
+	<div id="pane1_right" style="margin-left:200px;">
+	<div class="login-panel" id="create_panel" style="width:500px;height:500px;border:1px solid red;">
+		<div class="login-btn-panel" style="margin-top:100px;">
+		    <a id="btn_pre_create_app" class="login-btn" href="javascript:pre_create_app();" style="width:160px;height:auto;font-size:17pt;padding-top:24px;padding-bottom: 24px;">
+					创建应用
+		    </a>
+			<p/>
+
+		</div>	
+	</div>
+	<div class="login-panel" id="pre_create_app" style="display:none;width:500px;height:300px;">
+		<div style="float:left;">
+			<div style="text-align:left;"><div style="width:200px;">应用ID</div>&nbsp;<input id="app_id"></input> </div>
+			<div style="text-align:left;"><div style="width:200px;">应用名称</div>&nbsp;<input id="app_name"></input> </div>
+			<div style="text-align:left;"><div style="width:100px;">应用描述</div>&nbsp;<textarea id="app_desc"></textarea> </div>
+		</div>
+		<div style="float:left;margin-left:80px;">
+			<div id="app_key_container" style="text-align:left;margin-bottom:10px;"><div style="width:200px;font-size:12pt;font-weight:300;">App Key</div>&nbsp;<span id="app_key" style="font-weight:300;">xxxx-xxxx-xxxx-xxxx</span> </div>
+			<div style="text-align:left;"><div style="width:200px;font-size:12pt;font-weight:400;">App Type</div>&nbsp;<span id="app_type" style="font-weight:300;">AddOn</span> </div>
+			<div style="text-align:left;margin-top:3px;"><div style="width:200px;font-size:12pt;font-weight:400;">Dev Tenant</div>&nbsp;
+				<select id="devtenant">
+					<option>10.58.113.181</option>
+					<option onclick="create_dt();">Create New Dev Tenant</option>
+					
+				</select>
+			</div>
+
+		</div>
+		<div style="clear:both;">
+		</div>
+		<div class="login-btn-panel" >
+		    <a id="btn_create_app" class="login-btn" href="javascript:create_app();" style="display:block;width:100px;height:auto;font-size:12pt;padding-top:24px;padding-bottom: 24px;">
+					创建应用
+		    </a>
+		    <a id="btn_open_app" class="login-btn" href="godev();" style="display:none;width:100px;height:auto;font-size:12pt;padding-top:24px;padding-bottom: 24px;float:left;">
+					进入开发
+		    </a>
+		    <a id="btn_del_app" class="login-btn" href="javascript:void();" style="display:none;float:left;width:100px;height:auto;font-size:12pt;padding-top:24px;padding-bottom: 24px;">
+					删除应用
+		    </a>
+		    <a id="btn_update_app" class="login-btn" href="javascript:void();" style="display:none;float:left;width:100px;height:auto;font-size:12pt;padding-top:24px;padding-bottom: 24px;">
+					保存
+		    </a>		
+			<p/>
+
+		</div>	
+	</div>
+	</div><!-- pane1_right -->
+	</div><!-- pane1 -->
+	</div><!-- main -->
+	</center>
+	<div id="waitingbg" style="display:none;z-index:1000;position:absolute;left:0;top:0;width:100%;height:100%;">
+		<center>			
+			<img src="/images/wait3.gif" style="width:50px;margin-top:230px;"/>
+		</center>
+	</div>
+	<!-- <div id="popup" style="display:block;background:url(/images/bg_dlg.png);background-size: 100% 100%;color:yellow;text-align:center;padding:28px;position:absolute;z-index:800;width:187px;min-height:37px;max-height:200px;overflow:auto;word-wrap: break-word;word-break: normal;left:38;top:180px;/*background-size:243px 93px;*/border:0px red solid;" onclick="close_popup();">
+	
+	</div> -->
+	<!-- <div id="popup" class="round_border_m" style="display:none;opacity:0.3;background-color:black;color:white;text-align:center;padding:28px;position:absolute;left:250px;top:180px;z-index:800;width:200px;height:128px;font-size:13pt;min-height:37px;max-height:200px;overflow:auto;word-wrap: break-word;word-break: normal;/*background-size:243px 93px;*/border:0px red solid;" onclick="close_popup();">
+	
+	</div>  -->
+	<div id="popup" class="round_border_b" style="display:none;opacity:0.3;background-color:black;color:white;text-align:center;padding:28px;position:absolute;left:500px;top:180px;z-index:800;width:300px;height:168px;font-size:13pt;min-height:57px;max-height:300px;overflow:auto;word-wrap: break-word;word-break: normal;/*background-size:243px 93px;*/border:0px red solid;" onclick="close_popup();">
+		<div id="popup_c" style="margin:10px;top:50%; transform: translateY(-50%);position:relative;border:0px solid red;">	
+		</div>
+	</div>
+	<script src="/javascripts/oauth.js"></script>
+	
+	<script>
+	function create_dt(){
+		alert('Not implemented');$('#devtenant').val('10.58.113.181');return false;
+	}
+	function godev(appid){
+		alert();
+		
+	}
+	function del_app(appid){
+			$.ajax({
+				type: "post",
+				url: "/app/delapp?t="+ new Date().getTime(),
+				dataType: 'json',
+				
+				data: {
+					appid:appid,
+			
+					// sid: '<%=@sid%>',
+					// authenticity_token:window._token
+				}, 
+				success: function(data, textStatus){
+					// alert(data);
+					showWaiting(false);
+					if (data.error){
+						err = data.error.replace(/[<>]/g, "&");
+						// alert(data.error);
+						popup(err);
+					}else{
+				   // alert( "Data Saved: " + data +","+ textStatus);
+				    window.location.href="/index.html";
+				}
+			
+			},
+				error: function(xhr, textStatus, errorThrow){
+					// alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+					showWaiting(false);
+	
+				}
+		});
+	}
+	function show_app_info(appid){
+		$("#create_panel").css("display", "none");
+		$("#pre_create_app").css("display", "block");
+		$("input#app_id").val(appid);
+		$("input#app_name").val($("#btn_open_app_"+appid+ " span.appname").html());
+		$("#app_desc").val($("#btn_open_app_"+appid+ " span.appdesc").html());
+		$("#btn_open_app").css("display", "block");
+		$("#btn_create_app").css("display", "none");
+		$("#btn_del_app").css("display", "block");
+		$("#btn_update_app").css("display", "block");
+		
+		$("#btn_del_app").click(function(event){
+			del_app(appid);
+		});
+		$("#btn_update_app").click(function(event){
+			update_app(appid);
+		});
+		// $("#btn_open_app").click(function(event){
+		// 	godev(appid);
+		// });
+		
+		server = $("select#devtenant").val();
+		// alert(server);
+		$("#btn_open_app").attr("href", "http://"+server+":3000/index.html?appid="+appid);
+		
+	}
+	function update_app(appid){
+		// app_id = $("input#app_id").val();
+		app_name = $("input#app_name").val();
+		app_desc = $("#app_desc").val();
+		app_dt = $("select#devtenant").val();
+		// alert(app_dt);
+		// alert(app_id);
+		$.ajax({
+			type: "post",
+			url: "/app/update?t="+ new Date().getTime(),
+			dataType: 'json',
+			
+			data: {
+				appid:appid,
+				name:app_name,
+				desc:app_desc,
+				dt: app_dt,
+				// sid: '<%=@sid%>',
+				// authenticity_token:window._token
+			}, 
+			success: function(data, textStatus){
+				// alert(data);
+				showWaiting(false);
+				if (data.error){
+					err = data.error.replace(/[<>]/g, "&");
+					// alert(data.error);
+					popup(err);
+				}else{
+					popup("Successfully");
+					load_app_list();
+			   // alert( "Data Saved: " + data +","+ textStatus);
+			    // window.location.href="/index.html?appid="+app_id;
+			}
+		
+		},
+			error: function(xhr, textStatus, errorThrow){
+				// alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+				showWaiting(false);
+
+			}
+	});
+		showWaiting(true);
+	}
+	function pre_create_app(){
+		$("#create_panel").css("display", "none");
+		$("#pre_create_app").css("display", "block");
+		
+		$("#btn_create_app").css("display", "block");
+		
+		$("input#app_id").val("");
+		$("input#app_name").val("");
+		$("#app_desc").val("");
+		$("#app_key_container").css("display", "none");
+	}
+		function create_app(){
+			app_id = $("input#app_id").val();
+			app_name = $("input#app_name").val();
+			app_desc = $("#app_desc").val();
+			app_dt = $("select#devtenant").val();
+			
+			// alert(app_id);
+			$.ajax({
+				type: "post",
+				url: "/app/createapp?t="+ new Date().getTime(),
+				dataType: 'json',
+				
+				data: {
+					appid:app_id,
+					name:app_name,
+					desc:app_desc,
+					dt:app_dt,
+					// sid: '<%=@sid%>',
+					// authenticity_token:window._token
+				}, 
+				success: function(data, textStatus){
+					// alert(data);
+					showWaiting(false);
+					if (data.error){
+						err = data.error.replace(/[<>]/g, "&");
+						// alert(data.error);
+						popup(err);
+					}else{
+				   // alert( "Data Saved: " + data +","+ textStatus);
+				    window.location.href="/index.html?appid="+app_id;
+				}
+			
+			},
+				error: function(xhr, textStatus, errorThrow){
+					// alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+					showWaiting(false);
+	
+				}
+		});
+			showWaiting(true);
+		}
+	
+	function load_app_list(){
+		
+			$.ajax({
+				type: "post",
+				url: "/app/list?t="+ new Date().getTime(),
+				//dataType: 'json',
+
+				data: {
+			
+					// sid: '<%=@sid%>',
+					// authenticity_token:window._token
+				}, 
+				success: function(data, textStatus){
+					//alert( "Data Saved: " + data +","+ textStatus);
+				   
+					showWaiting(false);
+					if (data.error){
+						popup(data.error);
+					}else{
+						$("#applist").html(data);
+					}
+			
+				},
+				error: function(xhr, textStatus, errorThrow){
+					// alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+					showWaiting(false);
+	
+				}
+			});
+			
+			showWaiting(true);
+		}
+		
+		function getUserInfo(atoken){
+				$.ajax({
+					type: "post",
+					url: "https://o.anywhere.cn:8444/sld/oauth2/v1/tokeninfo?access_token="+atoken,
+					dataType: 'json',
+
+					data: {
+
+						// sid: '<%=@sid%>',
+						// authenticity_token:window._token
+					}, 
+					success: function(data, textStatus){
+						// alert(data);
+						$("#account_value").html(data.userName);
+						$("#account_name").html(data.userName);
+						$("#account_email").html(data.userEmail);
+						$("#account_tenant").html(data.tenantId);
+
+						showWaiting(false);
+					
+					   	alert(inspect(data));
 
 
-      #header {
-        background-image: url("images/rails.png");
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
-      
-      
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-      
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -11px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
-      
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
-      
-      
-      #getting-started {
-        border-top: 1px solid #ccc;
-        margin-top: 25px;
-        padding-top: 15px;
-      }
-      #getting-started h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-      #getting-started h2 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        color: #333;
-        margin-bottom: 25px;
-      }
-      #getting-started ol {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #getting-started li {
-        font-size: 18px;
-        color: #888;
-        margin-bottom: 25px;
-      }
-      #getting-started li h2 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 18px;
-        color: #333;
-      }
-      #getting-started li p {
-        color: #555;
-        font-size: 13px;
-      }
-      
-      
-      #search {
-        margin: 0;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 11px;
-      }
-      #search input {
-        font-size: 11px;
-        margin: 2px;
-      }
-      #search-text {width: 170px}
-      
-      
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-      
-    </style>
-    <script type="text/javascript" src="javascripts/prototype.js"></script>
-    <script type="text/javascript" src="javascripts/effects.js"></script>
-    <script type="text/javascript">
-      function about() {
-        if (Element.empty('about-content')) {
-          new Ajax.Updater('about-content', 'rails/info/properties', {
-            method:     'get',
-            onFailure:  function() {Element.classNames('about-content').add('failure')},
-            onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
-          });
-        } else {
-          new Effect[Element.visible('about-content') ? 
-            'BlindUp' : 'BlindDown']('about-content', {duration: 0.25});
-        }
-      }
-      
-      window.onload = function() {
-        $('search-text').value = '';
-        $('search').onsubmit = function() {
-          $('search-text').value = 'site:rubyonrails.org ' + $F('search-text');
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <form id="search" action="http://www.google.com/search" method="get">
-              <input type="hidden" name="hl" value="en" />
-              <input type="text" id="search-text" name="q" value="site:rubyonrails.org " />
-              <input type="submit" value="Search" /> the Rails site
-            </form>
-          </li>
-        
-          <li>
-            <h3>Join the community</h3>
-            <ul class="links">
-              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
-              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
-              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
-            </ul>
-          </li>
-          
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+					},
+					error: function(xhr, textStatus, errorThrow){
+						console.log("error"+errorThrow+","+textStatus+","+xhr.responseText);
+						popup("Get user info failed");
+						showWaiting(false);
 
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
+					}
+			});
+		}
+		function show_menu(){
+			$("#account_menu").css("display", "block");
+			$("#account_value").css("visibility", "hidden");
+		}
+		
+		$("#account_menu").menu({
+			select: function( event, ui ) {
+				$("#account_menu").menu("blur");
+				$("#account_menu").css("display", "none");
+				event.stopPropagation();
+				$("#account_value").css("visibility", "visible");						
+			}
+		});
+		// $("#account_menu ul").menu({ position: { my: "left top", at: "right-5 top+5" } });
+		
+		function init(){
+			alert("init");
+			redirect_uri="http://developer.anywhere.cn/index.html";
+			// oauth_url = "https://10.58.118.63:8444/sld/oauth2/authorize";
+			check_session({
+				// client_id: client_id,
+				redirect_uri:redirect_uri,
+				// oauth_url: oauth_url,
+				ajax: false
+			}, function(atoken){
+				try{
+					alert("dd="+atoken);
+					getUserInfo(atoken);
+				}catch(e){
+					
+				}
+				load_app_list();
+			});
+			
+			
+		}
 
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-        
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-          
-          <ol>          
-            <li>
-              <h2>Use <tt>script/generate</tt> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-            
-            <li>
-              <h2>Set up a default route and remove or rename this file</h2>
-              <p>Routes are set up in config/routes.rb.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <tt>rake db:migrate</tt> to create your database. If you're not using SQLite (the default), edit <tt>config/database.yml</tt> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-      
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
+		$("body").click(function(e){
+			// hide popup menu
+			$("#account_menu").menu("blur");
+			$("#account_menu").css("display", "none");
+			$("#account_value").css("visibility", "visible");
+		});
+		
+		init();
+		
+	</script>
+</body>
 </html>

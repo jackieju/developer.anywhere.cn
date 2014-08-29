@@ -94,6 +94,7 @@ class AppController < ApplicationController
         success('OK', {:ret=>r})
     end
     def _create_repo(repo)
+        p "===>setings=#{$SETTINGS}"
         p "cd #{$SETTINGS[:repo_root]}\n
                 git init --bare #{repo}.git"
                 
